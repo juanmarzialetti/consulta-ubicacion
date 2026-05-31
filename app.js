@@ -145,6 +145,11 @@ function mostrarPopup(data) {
                 ${formatearFecha(data.fechaDisponibilidad)}
             </p>
 
+            <p>
+                <strong>Vencimiento:</strong>
+                ${formatearFecha(data.fechaVencimiento)}
+            </p>
+
             <p class="mensaje-popup">
                 ${data.mensaje}
             </p>
@@ -196,6 +201,11 @@ function pintarResultado(data) {
             <p>
                 <strong>Fecha de disponibilidad:</strong>
                 ${formatearFecha(data.fechaDisponibilidad)}
+            </p>
+
+            <p>
+                <strong>Fecha de vencimiento:</strong>
+                ${formatearFecha(data.fechaVencimiento)}
             </p>
 
             <p class="mensaje">
