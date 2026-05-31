@@ -4,6 +4,9 @@ const popup =
 const popupBody =
     document.getElementById("popup-body");
 
+const beep =
+    document.getElementById("beep");
+
 let bloqueoEscaneo =
     false;
 
@@ -51,8 +54,20 @@ async function consultarTracking(valor) {
         return;
     }
 
-    bloqueoEscaneo =
-        true;
+        bloqueoEscaneo =
+            true;
+
+        /*
+            Sonido beep
+        */
+
+        try {
+
+            beep.currentTime = 0;
+
+            beep.play();
+
+        } catch (e) {}
 
     try {
 
@@ -245,9 +260,14 @@ const scanner =
         false
     );
 
-scanner.render(
-    (decodedText) => {
-        consultarTracking(decodedText);
-    },
+    scanner.render(
+        (decodedText) => {
+
+            if (bloqueoEscaneo) {
+                return;
+            }
+
+            consultarTracking(decodedText);
+        },
     () => {}
 );
