@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de paquete</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+
+    <main class="contenedor">
+
+        <h1>Consulta de paquete</h1>
+
+        <p class="subtitulo">
+            Escaneá el código de tu pieza o ingresalo manualmente.
+        </p>
+
+        <div id="reader"></div>
+
+        <input
+            id="tracking"
+            type="text"
+            placeholder="Ej: HC439171090AR"
+        >
+
+        <button id="btnConsultar">
+            Consultar
+        </button>
+
+        <section id="resultado" class="resultado oculto"></section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

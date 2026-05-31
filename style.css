@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f4f4f5;
+    color: #1f2937;
+}
+
+.contenedor {
+    max-width: 430px;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 8px;
+}
+
+.subtitulo {
+    color: #6b7280;
+    font-size: 15px;
+}
+
+#reader {
+    margin: 20px 0;
+    background: white;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 4px 12px #00000018;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    font-size: 17px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: #facc15;
+    cursor: pointer;
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 18px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px #00000018;
+    text-align: left;
+}
+
+.resultado h2 {
+    text-align: center;
+    margin-top: 0;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.disponible {
+    background: #22c55e;
+    color: white;
+}
+
+.entregada {
+    background: #9ca3af;
+    color: white;
+}
+
+.devuelta {
+    background: #ef4444;
+    color: white;
+}
+
+.pendiente {
+    background: #facc15;
+    color: #111827;
+}
+
+.no-encontrado {
+    background: #ef4444;
+    color: white;
+}
+
+.mensaje {
+    margin-top: 14px;
+    font-weight: bold;
+}
+
+.oculto {
+    display: none;
+}
