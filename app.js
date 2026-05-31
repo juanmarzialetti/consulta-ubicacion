@@ -1,3 +1,12 @@
+const popup =
+    document.getElementById("popup");
+
+const popupBody =
+    document.getElementById("popup-body");
+
+let bloqueoEscaneo =
+    false;
+
 const API_URL =
     "https://sparkling-meadow-f10cconsulta-paquetes-api.juanantoniomarzialetti.workers.dev";
 
@@ -29,33 +38,21 @@ inputTracking.addEventListener("keydown", (event) => {
 
 async function consultarTracking(valor) {
 
+    if (bloqueoEscaneo) {
+        return;
+    }
+
     const tracking =
         String(valor || "")
         .trim()
         .toUpperCase();
 
     if (!tracking) {
-        mostrarMensaje(
-            "Ingresá un tracking para consultar.",
-            "alerta"
-        );
         return;
     }
 
-    if (tracking === ultimoTrackingConsultado) {
-        return;
-    }
-
-    ultimoTrackingConsultado =
-        tracking;
-
-    inputTracking.value =
-        tracking;
-
-    mostrarMensaje(
-        "Consultando...",
-        "cargando"
-    );
+    bloqueoEscaneo =
+        true;
 
     try {
 
@@ -68,18 +65,82 @@ async function consultarTracking(valor) {
         const data =
             await response.json();
 
-        pintarResultado(data);
+        mostrarPopup(data);
 
     } catch (error) {
 
-        mostrarMensaje(
-            "No se pudo consultar el paquete. Intentá nuevamente.",
-            "error"
-        );
-
-        ultimoTrackingConsultado =
-            "";
+        mostrarPopup({
+            encontrado: false,
+            mensaje:
+                "Error al consultar"
+        });
     }
+
+    setTimeout(() => {
+
+        ocultarPopup();
+
+        bloqueoEscaneo =
+            false;
+
+    }, 3000);
+}
+
+function mostrarPopup(data) {
+
+    popup.classList.remove("oculto");
+
+    if (!data.encontrado) {
+
+        popupBody.innerHTML =
+            `
+                <h2 class="popup-error">
+                    NO ENCONTRADO
+                </h2>
+
+                <p>
+                    ${data.mensaje}
+                </p>
+            `;
+
+        return;
+    }
+
+    const claseEstado =
+        obtenerClaseEstado(data.estado);
+
+    popupBody.innerHTML =
+        `
+            <h2 class="${claseEstado}">
+                ${data.estado}
+            </h2>
+
+            <p>
+                <strong>Tracking:</strong>
+                ${data.tracking}
+            </p>
+
+            <p>
+                <strong>Ubicación:</strong>
+                ${data.ubicacion || "-"}
+            </p>
+
+            <p>
+                <strong>Fecha:</strong>
+                ${formatearFecha(data.fechaDisponibilidad)}
+            </p>
+
+            <p class="mensaje-popup">
+                ${data.mensaje}
+            </p>
+        `;
+}
+
+function ocultarPopup() {
+
+    popup.classList.add("oculto");
+
+    popupBody.innerHTML = "";
 }
 
 function pintarResultado(data) {
