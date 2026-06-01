@@ -45,10 +45,17 @@ async function consultarTracking(valor) {
         return;
     }
 
-    const tracking =
+    let tracking =
         String(valor || "")
         .trim()
         .toUpperCase();
+
+    if (
+        tracking &&
+        !tracking.endsWith("AR")
+    ) {
+        tracking += "AR";
+    }
 
     if (!tracking) {
         return;
