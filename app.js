@@ -50,8 +50,14 @@ async function consultarTracking(valor) {
         .trim()
         .toUpperCase();
 
+    /*
+        Si el tracking comienza con 2 letras
+        (HC, HE, XU, RR, etc.)
+        y no termina en AR
+    */
+
     if (
-        tracking &&
+        /^[A-Z]{2}/.test(tracking) &&
         !tracking.endsWith("AR")
     ) {
         tracking += "AR";
